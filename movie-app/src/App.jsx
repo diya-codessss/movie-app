@@ -7,8 +7,8 @@ function App() {
       <h1>My Movie App</h1>
       <h2>{movieName}</h2>
       <p>Rating: {rating}/10</p>
+      <button>Watch Now</button>
     </div>
   );
 }
-
 export default App;
