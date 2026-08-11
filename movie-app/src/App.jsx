@@ -1,3 +1,5 @@
+import MovieCard from "./components/MovieCard";
+
 function App() {
   const movieName = "The Dark Knight";
   const rating = 9.0;
@@ -8,7 +10,9 @@ function App() {
       <h2>{movieName}</h2>
       <p>Rating: {rating}/10</p>
       <button>Watch Now</button>
+      <MovieCard />
     </div>
   );
 }
+
 export default App;
