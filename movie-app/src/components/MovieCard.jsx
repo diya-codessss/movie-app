@@ -1,8 +1,8 @@
-function MovieCard() {
+function MovieCard({ title, rating }) {
   return (
     <div>
-      <h2>Inception</h2>
-      <p>Rating: 8.8/10</p>
+      <h2>{title}</h2>
+      <p>Rating: {rating}/10</p>
     </div>
   );
 }

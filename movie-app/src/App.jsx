@@ -10,7 +10,7 @@ function App() {
       <h2>{movieName}</h2>
       <p>Rating: {rating}/10</p>
       <button>Watch Now</button>
-      <MovieCard />
+      <MovieCard title="Inception" rating={8.8} />
     </div>
   );
 }
