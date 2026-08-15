@@ -19,6 +19,12 @@ function App() {
 
       <p>Watch Count: {count}</p>
 
+      {count > 0 ? (
+        <p>Movie is being watched 🎬</p>
+      ) : (
+        <p>Click Watch to start watching.</p>
+      )}
+
       <button onClick={() => setCount(count + 1)}>
         Watch
       </button>
