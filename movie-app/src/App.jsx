@@ -3,6 +3,7 @@ import MovieCard from "./components/MovieCard";
 
 function App() {
   const [count, setCount] = useState(0);
+  const [search, setSearch] = useState("");
 
   const movies = [
     { id: 1, title: "The Dark Knight", rating: 9.0 },
@@ -13,6 +14,15 @@ function App() {
   return (
     <div>
       <h1>My Movie App</h1>
+
+      <input
+        type="text"
+        placeholder="Search movie..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+
+      <p>Search: {search}</p>
 
       {movies.map((movie) => (
         <MovieCard
