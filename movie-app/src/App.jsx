@@ -24,13 +24,17 @@ function App() {
 
       <p>Search: {search}</p>
 
-      {movies.map((movie) => (
-        <MovieCard
-          key={movie.id}
-          title={movie.title}
-          rating={movie.rating}
-        />
-      ))}
+     {movies
+  .filter((movie) =>
+    movie.title.toLowerCase().includes(search.toLowerCase())
+  )
+  .map((movie) => (
+    <MovieCard
+      key={movie.id}
+      title={movie.title}
+      rating={movie.rating}
+    />
+  ))}
 
       <p>Watch Count: {count}</p>
 
