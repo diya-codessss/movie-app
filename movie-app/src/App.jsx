@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MovieCard from "./components/MovieCard";
 
 function App() {
   const [count, setCount] = useState(0);
   const [search, setSearch] = useState("");
+  useEffect(() => {
+  console.log("Movie App Loaded");
+}, []);
 
   const movies = [
     { id: 1, title: "The Dark Knight", rating: 9.0 },
