@@ -7,6 +7,9 @@ function App() {
   useEffect(() => {
   console.log("Movie App Loaded");
 }, []);
+useEffect(() => {
+  console.log("Search changed:", search);
+}, [search]);
 
   const movies = [
     { id: 1, title: "The Dark Knight", rating: 9.0 },
