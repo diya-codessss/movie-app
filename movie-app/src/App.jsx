@@ -10,6 +10,16 @@ function App() {
 useEffect(() => {
   console.log("Search changed:", search);
 }, [search]);
+useEffect(() => {
+  fetch("https://jsonplaceholder.typicode.com/posts")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("API Data:", data);
+    })
+    .catch((error) => {
+      console.log("Error:", error);
+    });
+}, []);
 
   const movies = [
     { id: 1, title: "The Dark Knight", rating: 9.0 },
