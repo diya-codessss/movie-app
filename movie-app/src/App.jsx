@@ -4,22 +4,26 @@ import MovieCard from "./components/MovieCard";
 function App() {
   const [count, setCount] = useState(0);
   const [search, setSearch] = useState("");
+  const [posts, setPosts] = useState([]);
+
   useEffect(() => {
-  console.log("Movie App Loaded");
-}, []);
-useEffect(() => {
-  console.log("Search changed:", search);
-}, [search]);
-useEffect(() => {
-  fetch("https://jsonplaceholder.typicode.com/posts")
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("API Data:", data);
-    })
-    .catch((error) => {
-      console.log("Error:", error);
-    });
-}, []);
+    console.log("Movie App Loaded");
+  }, []);
+
+  useEffect(() => {
+    console.log("Search changed:", search);
+  }, [search]);
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/posts")
+      .then((response) => response.json())
+      .then((data) => {
+        setPosts(data);
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+  }, []);
 
   const movies = [
     { id: 1, title: "The Dark Knight", rating: 9.0 },
@@ -40,17 +44,17 @@ useEffect(() => {
 
       <p>Search: {search}</p>
 
-     {movies
-  .filter((movie) =>
-    movie.title.toLowerCase().includes(search.toLowerCase())
-  )
-  .map((movie) => (
-    <MovieCard
-      key={movie.id}
-      title={movie.title}
-      rating={movie.rating}
-    />
-  ))}
+      {movies
+        .filter((movie) =>
+          movie.title.toLowerCase().includes(search.toLowerCase())
+        )
+        .map((movie) => (
+          <MovieCard
+            key={movie.id}
+            title={movie.title}
+            rating={movie.rating}
+          />
+        ))}
 
       <p>Watch Count: {count}</p>
 
@@ -67,6 +71,15 @@ useEffect(() => {
       <button onClick={() => setCount(0)}>
         Reset
       </button>
+
+      <h2>API Posts</h2>
+
+      {posts.slice(0, 5).map((post) => (
+        <div key={post.id}>
+          <h3>{post.title}</h3>
+          <p>{post.body}</p>
+        </div>
+      ))}
     </div>
   );
 }
