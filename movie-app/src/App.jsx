@@ -5,6 +5,8 @@ function App() {
   const [count, setCount] = useState(0);
   const [search, setSearch] = useState("");
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     console.log("Movie App Loaded");
@@ -16,12 +18,19 @@ function App() {
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/posts")
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        return response.json();
+      })
       .then((data) => {
         setPosts(data);
+        setLoading(false);
       })
       .catch((error) => {
-        console.log("Error:", error);
+        setError(error.message);
+        setLoading(false);
       });
   }, []);
 
@@ -74,12 +83,18 @@ function App() {
 
       <h2>API Posts</h2>
 
-      {posts.slice(0, 5).map((post) => (
-        <div key={post.id}>
-          <h3>{post.title}</h3>
-          <p>{post.body}</p>
-        </div>
-      ))}
+      {loading && <p>Loading...</p>}
+
+      {error && <p>{error}</p>}
+
+      {!loading &&
+        !error &&
+        posts.slice(0, 5).map((post) => (
+          <div key={post.id}>
+            <h3>{post.title}</h3>
+            <p>{post.body}</p>
+          </div>
+        ))}
     </div>
   );
 }
