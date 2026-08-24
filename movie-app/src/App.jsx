@@ -7,6 +7,7 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [postSearch, setPostSearch] = useState("");
 
   useEffect(() => {
     console.log("Movie App Loaded");
@@ -83,18 +84,30 @@ function App() {
 
       <h2>API Posts</h2>
 
+      <input
+        type="text"
+        placeholder="Search posts..."
+        value={postSearch}
+        onChange={(e) => setPostSearch(e.target.value)}
+      />
+
       {loading && <p>Loading...</p>}
 
       {error && <p>{error}</p>}
 
       {!loading &&
         !error &&
-        posts.slice(0, 5).map((post) => (
-          <div key={post.id}>
-            <h3>{post.title}</h3>
-            <p>{post.body}</p>
-          </div>
-        ))}
+        posts
+          .filter((post) =>
+            post.title.toLowerCase().includes(postSearch.toLowerCase())
+          )
+          .slice(0, 5)
+          .map((post) => (
+            <div key={post.id}>
+              <h3>{post.title}</h3>
+              <p>{post.body}</p>
+            </div>
+          ))}
     </div>
   );
 }
