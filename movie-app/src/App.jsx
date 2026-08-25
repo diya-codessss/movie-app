@@ -41,6 +41,10 @@ function App() {
     { id: 3, title: "Interstellar", rating: 8.7 }
   ];
 
+  const handleWatch = () => {
+    setCount(count + 1);
+  };
+
   return (
     <div>
       <h1>My Movie App</h1>
@@ -63,6 +67,7 @@ function App() {
             key={movie.id}
             title={movie.title}
             rating={movie.rating}
+            onWatch={handleWatch}
           />
         ))}
 
@@ -73,10 +78,6 @@ function App() {
       ) : (
         <p>Click Watch to start watching.</p>
       )}
-
-      <button onClick={() => setCount(count + 1)}>
-        Watch
-      </button>
 
       <button onClick={() => setCount(0)}>
         Reset
