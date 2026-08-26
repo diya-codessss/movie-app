@@ -95,7 +95,7 @@ function App() {
       {loading && <p>Loading...</p>}
 
       {error && <p>{error}</p>}
-
+9
       {!loading &&
         !error &&
         posts
