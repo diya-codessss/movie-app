@@ -15,6 +15,8 @@ function MovieCard({ title, rating, onWatch }) {
       <button onClick={() => setFavorite(!favorite)}>
         {favorite ? "❤️ Favorited" : "🤍 Add to Favorites"}
       </button>
+
+      {favorite && <p>❤️ {title} added to favorites!</p>}
     </div>
   );
 }
