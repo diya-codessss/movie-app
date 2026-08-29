@@ -8,6 +8,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [postSearch, setPostSearch] = useState("");
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     console.log("Movie App Loaded");
@@ -45,6 +46,20 @@ function App() {
     setCount(count + 1);
   };
 
+  const handleFavorite = (movie) => {
+    setFavorites((prevFavorites) => {
+      const alreadyFavorite = prevFavorites.some(
+        (fav) => fav.id === movie.id
+      );
+
+      if (alreadyFavorite) {
+        return prevFavorites.filter((fav) => fav.id !== movie.id);
+      }
+
+      return [...prevFavorites, movie];
+    });
+  };
+
   return (
     <div>
       <h1>My Movie App</h1>
@@ -68,6 +83,7 @@ function App() {
             title={movie.title}
             rating={movie.rating}
             onWatch={handleWatch}
+            onFavorite={() => handleFavorite(movie)}
           />
         ))}
 
@@ -83,6 +99,18 @@ function App() {
         Reset
       </button>
 
+      <h2>Favorites ❤️</h2>
+
+      {favorites.length === 0 ? (
+        <p>No favorite movies yet.</p>
+      ) : (
+        favorites.map((movie) => (
+          <p key={movie.id}>
+            ❤️ {movie.title} - {movie.rating}/10
+          </p>
+        ))
+      )}
+
       <h2>API Posts</h2>
 
       <input
@@ -95,7 +123,7 @@ function App() {
       {loading && <p>Loading...</p>}
 
       {error && <p>{error}</p>}
-9
+
       {!loading &&
         !error &&
         posts

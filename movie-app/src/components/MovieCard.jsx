@@ -1,22 +1,17 @@
-import { useState } from "react";
-
-function MovieCard({ title, rating, onWatch }) {
-  const [favorite, setFavorite] = useState(false);
-
+function MovieCard({ title, rating, onWatch, onFavorite }) {
   return (
     <div>
       <h2>{title}</h2>
+
       <p>Rating: {rating}/10</p>
 
       <button onClick={onWatch}>
         Watch Movie
       </button>
 
-      <button onClick={() => setFavorite(!favorite)}>
-        {favorite ? "❤️ Favorited" : "🤍 Add to Favorites"}
+      <button onClick={onFavorite}>
+        ❤️ Add / Remove Favorite
       </button>
-
-      {favorite && <p>❤️ {title} added to favorites!</p>}
     </div>
   );
 }
