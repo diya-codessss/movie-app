@@ -8,7 +8,12 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [postSearch, setPostSearch] = useState("");
-  const [favorites, setFavorites] = useState([]);
+
+  const [favorites, setFavorites] = useState(() => {
+    const savedFavorites = localStorage.getItem("favorites");
+
+    return savedFavorites ? JSON.parse(savedFavorites) : [];
+  });
 
   useEffect(() => {
     console.log("Movie App Loaded");
@@ -24,6 +29,7 @@ function App() {
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
+
         return response.json();
       })
       .then((data) => {
@@ -35,6 +41,10 @@ function App() {
         setLoading(false);
       });
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
 
   const movies = [
     { id: 1, title: "The Dark Knight", rating: 9.0 },
