@@ -1,4 +1,4 @@
-function MovieCard({ title, rating, onWatch, onFavorite }) {
+function MovieCard({ title, rating, onWatch, onFavorite, isFavorite }) {
   return (
     <div>
       <h2>{title}</h2>
@@ -10,7 +10,7 @@ function MovieCard({ title, rating, onWatch, onFavorite }) {
       </button>
 
       <button onClick={onFavorite}>
-        ❤️ Add / Remove Favorite
+      {isFavorite ? "❤️ Favorited" : "🤍 Add to Favorites"}
       </button>
     </div>
   );

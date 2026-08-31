@@ -94,6 +94,7 @@ function App() {
             rating={movie.rating}
             onWatch={handleWatch}
             onFavorite={() => handleFavorite(movie)}
+            isFavorite={favorites.some((fav) => fav.id === movie.id)}
           />
         ))}
 
