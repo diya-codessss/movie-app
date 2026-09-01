@@ -3,6 +3,7 @@ import MovieCard from "./components/MovieCard";
 
 function App() {
   const [count, setCount] = useState(0);
+  const [currentMovie, setCurrentMovie] = useState("");
   const [search, setSearch] = useState("");
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -52,10 +53,10 @@ function App() {
     { id: 3, title: "Interstellar", rating: 8.7 }
   ];
 
-  const handleWatch = () => {
-    setCount(count + 1);
-  };
-
+  const handleWatch = (movieTitle) => {
+  setCount(count + 1);
+  setCurrentMovie(movieTitle);
+};
   const handleFavorite = (movie) => {
     setFavorites((prevFavorites) => {
       const alreadyFavorite = prevFavorites.some(
@@ -92,13 +93,16 @@ function App() {
             key={movie.id}
             title={movie.title}
             rating={movie.rating}
-            onWatch={handleWatch}
+            onWatch={() => handleWatch(movie.title)}
             onFavorite={() => handleFavorite(movie)}
             isFavorite={favorites.some((fav) => fav.id === movie.id)}
           />
         ))}
 
       <p>Watch Count: {count}</p>
+      {currentMovie && (
+  <p>🎬 Currently watching: {currentMovie}</p>
+)}
 
       {count > 0 ? (
         <p>Movie is being watched 🎬</p>
