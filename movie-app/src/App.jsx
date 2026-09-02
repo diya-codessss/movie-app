@@ -5,6 +5,11 @@ function App() {
   const [count, setCount] = useState(0);
   const [currentMovie, setCurrentMovie] = useState("");
   const [search, setSearch] = useState("");
+
+  const [movies, setMovies] = useState([]);
+  const [movieLoading, setMovieLoading] = useState(true);
+  const [movieError, setMovieError] = useState("");
+
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -16,6 +21,33 @@ function App() {
     return savedFavorites ? JSON.parse(savedFavorites) : [];
   });
 
+  // Movie API
+  useEffect(() => {
+    fetch("https://dummyjson.com/products")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch movies");
+        }
+
+        return response.json();
+      })
+      .then((data) => {
+        setMovies(
+          data.products.slice(0, 10).map((item) => ({
+            id: item.id,
+            title: item.title,
+            rating: item.rating,
+          }))
+        );
+
+        setMovieLoading(false);
+      })
+      .catch((error) => {
+        setMovieError(error.message);
+        setMovieLoading(false);
+      });
+  }, []);
+
   useEffect(() => {
     console.log("Movie App Loaded");
   }, []);
@@ -24,6 +56,7 @@ function App() {
     console.log("Search changed:", search);
   }, [search]);
 
+  // Posts API
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then((response) => {
@@ -43,20 +76,16 @@ function App() {
       });
   }, []);
 
+  // Save favorites
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
 
-  const movies = [
-    { id: 1, title: "The Dark Knight", rating: 9.0 },
-    { id: 2, title: "Inception", rating: 8.8 },
-    { id: 3, title: "Interstellar", rating: 8.7 }
-  ];
-
   const handleWatch = (movieTitle) => {
-  setCount(count + 1);
-  setCurrentMovie(movieTitle);
-};
+    setCount(count + 1);
+    setCurrentMovie(movieTitle);
+  };
+
   const handleFavorite = (movie) => {
     setFavorites((prevFavorites) => {
       const alreadyFavorite = prevFavorites.some(
@@ -64,7 +93,9 @@ function App() {
       );
 
       if (alreadyFavorite) {
-        return prevFavorites.filter((fav) => fav.id !== movie.id);
+        return prevFavorites.filter(
+          (fav) => fav.id !== movie.id
+        );
       }
 
       return [...prevFavorites, movie];
@@ -75,6 +106,7 @@ function App() {
     <div>
       <h1>My Movie App</h1>
 
+      {/* Movie Search */}
       <input
         type="text"
         placeholder="Search movie..."
@@ -84,25 +116,39 @@ function App() {
 
       <p>Search: {search}</p>
 
-      {movies
-        .filter((movie) =>
-          movie.title.toLowerCase().includes(search.toLowerCase())
-        )
-        .map((movie) => (
-          <MovieCard
-            key={movie.id}
-            title={movie.title}
-            rating={movie.rating}
-            onWatch={() => handleWatch(movie.title)}
-            onFavorite={() => handleFavorite(movie)}
-            isFavorite={favorites.some((fav) => fav.id === movie.id)}
-          />
-        ))}
+      <h2>Movies 🎬</h2>
 
+      {movieLoading && <p>Loading Movies...</p>}
+
+      {movieError && <p>{movieError}</p>}
+
+      {!movieLoading &&
+        !movieError &&
+        movies
+          .filter((movie) =>
+            movie.title
+              .toLowerCase()
+              .includes(search.toLowerCase())
+          )
+          .map((movie) => (
+            <MovieCard
+              key={movie.id}
+              title={movie.title}
+              rating={movie.rating}
+              onWatch={() => handleWatch(movie.title)}
+              onFavorite={() => handleFavorite(movie)}
+              isFavorite={favorites.some(
+                (fav) => fav.id === movie.id
+              )}
+            />
+          ))}
+
+      {/* Watch Count */}
       <p>Watch Count: {count}</p>
+
       {currentMovie && (
-  <p>🎬 Currently watching: {currentMovie}</p>
-)}
+        <p>🎬 Currently watching: {currentMovie}</p>
+      )}
 
       {count > 0 ? (
         <p>Movie is being watched 🎬</p>
@@ -114,6 +160,7 @@ function App() {
         Reset
       </button>
 
+      {/* Favorites */}
       <h2>Favorites ❤️</h2>
 
       {favorites.length === 0 ? (
@@ -126,6 +173,7 @@ function App() {
         ))
       )}
 
+      {/* Posts API */}
       <h2>API Posts</h2>
 
       <input
@@ -143,7 +191,9 @@ function App() {
         !error &&
         posts
           .filter((post) =>
-            post.title.toLowerCase().includes(postSearch.toLowerCase())
+            post.title
+              .toLowerCase()
+              .includes(postSearch.toLowerCase())
           )
           .slice(0, 5)
           .map((post) => (
