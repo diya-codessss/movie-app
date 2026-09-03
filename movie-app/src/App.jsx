@@ -21,7 +21,7 @@ function App() {
     return savedFavorites ? JSON.parse(savedFavorites) : [];
   });
 
-  // Movie API
+  // Movies API
   useEffect(() => {
     fetch("https://dummyjson.com/products")
       .then((response) => {
@@ -37,6 +37,7 @@ function App() {
             id: item.id,
             title: item.title,
             rating: item.rating,
+            image: item.thumbnail,
           }))
         );
 
@@ -104,7 +105,7 @@ function App() {
 
   return (
     <div>
-      <h1>My Movie App</h1>
+      <h1>My Movie App 🎬</h1>
 
       {/* Movie Search */}
       <input
@@ -135,6 +136,7 @@ function App() {
               key={movie.id}
               title={movie.title}
               rating={movie.rating}
+              image={movie.image}
               onWatch={() => handleWatch(movie.title)}
               onFavorite={() => handleFavorite(movie)}
               isFavorite={favorites.some(
