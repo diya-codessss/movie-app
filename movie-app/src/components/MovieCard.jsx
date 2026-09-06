@@ -7,19 +7,18 @@ function MovieCard({
   isFavorite,
 }) {
   return (
-    <div>
+    <div className="movie-card">
       <img
         src={image}
         alt={title}
-        width="200"
       />
 
       <h2>{title}</h2>
 
-      <p>Rating: {rating}/10</p>
+      <p>⭐ Rating: {rating}/10</p>
 
       <button onClick={onWatch}>
-        Watch Movie
+        🎬 Watch Movie
       </button>
 
       <button onClick={onFavorite}>
