@@ -170,11 +170,22 @@ function App() {
       {favorites.length === 0 ? (
         <p>No favorite movies yet.</p>
       ) : (
-        favorites.map((movie) => (
-          <p key={movie.id}>
-            ❤️ {movie.title} - {movie.rating}/10
-          </p>
-        ))
+        <div className="favorites">
+          {favorites.map((movie) => (
+            <div className="favorite-card" key={movie.id}>
+              <img
+                src={movie.image}
+                alt={movie.title}
+              />
+
+              <div>
+                <h3>{movie.title}</h3>
+                <p>⭐ Rating: {movie.rating}/10</p>
+                <p>{movie.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       )}
 
       {/* Posts API */}
