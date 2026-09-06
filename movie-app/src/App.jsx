@@ -38,6 +38,7 @@ function App() {
             title: item.title,
             rating: item.rating,
             image: item.thumbnail,
+            description: item.description,
           }))
         );
 
@@ -137,6 +138,7 @@ function App() {
               title={movie.title}
               rating={movie.rating}
               image={movie.image}
+              description={movie.description}
               onWatch={() => handleWatch(movie.title)}
               onFavorite={() => handleFavorite(movie)}
               isFavorite={favorites.some(

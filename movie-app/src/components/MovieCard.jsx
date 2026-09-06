@@ -2,6 +2,7 @@ function MovieCard({
   title,
   rating,
   image,
+  description,
   onWatch,
   onFavorite,
   isFavorite,
@@ -16,6 +17,8 @@ function MovieCard({
       <h2>{title}</h2>
 
       <p>⭐ Rating: {rating}/10</p>
+
+      <p>{description}</p>
 
       <button onClick={onWatch}>
         🎬 Watch Movie
