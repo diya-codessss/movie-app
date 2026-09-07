@@ -124,28 +124,31 @@ function App() {
 
       {movieError && <p>{movieError}</p>}
 
-      {!movieLoading &&
-        !movieError &&
-        movies
-          .filter((movie) =>
-            movie.title
-              .toLowerCase()
-              .includes(search.toLowerCase())
-          )
-          .map((movie) => (
-            <MovieCard
-              key={movie.id}
-              title={movie.title}
-              rating={movie.rating}
-              image={movie.image}
-              description={movie.description}
-              onWatch={() => handleWatch(movie.title)}
-              onFavorite={() => handleFavorite(movie)}
-              isFavorite={favorites.some(
-                (fav) => fav.id === movie.id
-              )}
-            />
-          ))}
+      {!movieLoading && 
+  !movieError && (
+    <div className="movies">
+      {movies
+        .filter((movie) => 
+          movie.title
+            .toLowerCase()
+            .includes(search.toLowerCase())
+        )
+        .map((movie) => (
+          <MovieCard
+            key={movie.id}
+            title={movie.title}
+            rating={movie.rating}
+            image={movie.image}
+            description={movie.description}
+            onWatch={() => handleWatch(movie.title)}
+            onFavorite={() => handleFavorite(movie)}
+            isFavorite={favorites.some(
+              (fav) => fav.id === movie.id
+            )}
+          />
+        ))}
+    </div>
+  )}
 
       {/* Watch Count */}
       <p>Watch Count: {count}</p>
