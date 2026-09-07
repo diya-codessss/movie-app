@@ -185,6 +185,9 @@ function App() {
                 <h3>{movie.title}</h3>
                 <p>⭐ Rating: {movie.rating}/10</p>
                 <p>{movie.description}</p>
+                 <button onClick={() => handleFavorite(movie)}>
+                    ❌ Remove from Favorites
+                 </button>
               </div>
             </div>
           ))}
