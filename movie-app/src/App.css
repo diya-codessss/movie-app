@@ -65,3 +65,14 @@ input:focus {
 .movie-card button:hover {
   transform: scale(1.05);
 }
+.favorite-card button {
+  padding: 9px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.favorite-card button:hover {
+  opacity: 0.8;
+}
