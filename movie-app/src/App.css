@@ -79,3 +79,20 @@ input:focus {
 .favorite-card button:hover {
   opacity: 0.8;
 }
+.watch-btn {
+  background: #333;
+  color: white;
+}
+
+.favorite-btn {
+  background: #eee;
+  color: #333;
+}
+
+.watch-btn:hover {
+  opacity: 0.85;
+}
+
+.favorite-btn:hover {
+  opacity: 0.85;
+}
