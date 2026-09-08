@@ -20,11 +20,17 @@ function MovieCard({
 
       <p>{description}</p>
 
-      <button onClick={onWatch}>
+      <button
+        className="watch-btn"
+        onClick={onWatch}
+      >
         🎬 Watch Movie
       </button>
 
-      <button onClick={onFavorite}>
+      <button
+        className="favorite-btn"
+        onClick={onFavorite}
+      >
         {isFavorite
           ? "❤️ Favorited"
           : "🤍 Add to Favorites"}
