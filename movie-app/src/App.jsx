@@ -116,7 +116,7 @@ function App() {
         onChange={(e) => setSearch(e.target.value)}
       />
 
-      <p>Search: {search}</p>
+      {search && <p>Searching for: "{search}"</p>}
 
       <h2>Movies 🎬</h2>
 
