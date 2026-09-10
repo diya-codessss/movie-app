@@ -6,7 +6,7 @@ function App() {
   const [count, setCount] = useState(0);
   const [currentMovie, setCurrentMovie] = useState("");
   const [search, setSearch] = useState("");
-  const [watchedMovie, setWatchedMovie] = useState("");
+  const [watchedMovies, setWatchedMovies] = useState([]);
 
   const [movies, setMovies] = useState([]);
   const [movieLoading, setMovieLoading] = useState(true);
@@ -136,13 +136,13 @@ function App() {
   description={movie.description}
   onWatch={() => {
     handleWatch(movie.title);
-    setWatchedMovie(movie.title);
+    setWatchedMovies((prev) => [...prev, movie.title]);
   }}
   onFavorite={() => handleFavorite(movie)}
   isFavorite={favorites.some(
     (fav) => fav.id === movie.id
   )}
-  isWatched={watchedMovie === movie.title}
+  isWatched={watchedMovies.includes(movie.title)}
 />
         ))}
     </div>
@@ -162,9 +162,15 @@ function App() {
     <p>Click Watch to start watching.</p>
   )}
 
-  <button onClick={() => setCount(0)}>
-    Reset
-  </button>
+<button
+  onClick={() => {
+    setCount(0);
+    setWatchedMovies([]);
+    setCurrentMovie("");
+  }}
+>
+  Reset
+</button>
 
 </div>
    

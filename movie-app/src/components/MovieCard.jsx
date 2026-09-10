@@ -22,12 +22,12 @@ function MovieCard({
 
       <p>{description}</p>
 
-      <button
-        className={`watch-btn ${isWatched ? "watched" : ""}`}
-        onClick={onWatch}
-      >
-        {isWatched ? "✓ Watching" : "🎬 Watch Movie"}
-      </button>
+     <button
+  className={isWatched ? "watch-btn watched" : "watch-btn"}
+  onClick={onWatch}
+>
+  {isWatched ? "✓ Watching" : "🎬 Watch Movie"}
+</button>
 
       <button
         className="favorite-btn"
