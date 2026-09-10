@@ -21,34 +21,33 @@ function App() {
     return savedFavorites ? JSON.parse(savedFavorites) : [];
   });
 
-  // Movies API
   useEffect(() => {
-    fetch("https://dummyjson.com/products")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch movies");
-        }
+  fetch("https://ghibliapi.vercel.app/films")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to fetch movies");
+      }
 
-        return response.json();
-      })
-      .then((data) => {
-        setMovies(
-          data.products.slice(0, 10).map((item) => ({
-            id: item.id,
-            title: item.title,
-            rating: item.rating,
-            image: item.thumbnail,
-            description: item.description,
-          }))
-        );
+      return response.json();
+    })
+    .then((data) => {
+      setMovies(
+        data.slice(0, 10).map((item) => ({
+          id: item.id,
+          title: item.title,
+          rating: item.rt_score,
+          image: item.image,
+          description: item.description,
+        }))
+      );
 
-        setMovieLoading(false);
-      })
-      .catch((error) => {
-        setMovieError(error.message);
-        setMovieLoading(false);
-      });
-  }, []);
+      setMovieLoading(false);
+    })
+    .catch((error) => {
+      setMovieError(error.message);
+      setMovieLoading(false);
+    });
+}, []);
 
   useEffect(() => {
     console.log("Movie App Loaded");
@@ -116,7 +115,11 @@ function App() {
         onChange={(e) => setSearch(e.target.value)}
       />
 
-      {search && <p>Searching for: "{search}"</p>}
+     {search && (
+  <p className="search-result">
+    Searching for: "{search}"
+  </p>
+)}
 
       <h2>Movies 🎬</h2>
 
