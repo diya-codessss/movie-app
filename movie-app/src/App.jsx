@@ -6,6 +6,7 @@ function App() {
   const [count, setCount] = useState(0);
   const [currentMovie, setCurrentMovie] = useState("");
   const [search, setSearch] = useState("");
+  const [watchedMovie, setWatchedMovie] = useState("");
 
   const [movies, setMovies] = useState([]);
   const [movieLoading, setMovieLoading] = useState(true);
@@ -53,8 +54,6 @@ function App() {
     console.log("Search changed:", search);
   }, [search]);
 
-
-  // Save favorites
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
@@ -82,9 +81,24 @@ function App() {
 
   return (
     <div>
+
+    <nav className="navbar">
+      <div className="logo">
+        🎬 Movie<span className="logo-purple">App</span>
+      </div>
+
+      <div className="nav-links">
+        <a href="#movies">⌂ Movies</a>
+        <a href="#favorites">♡ Favorites</a>
+      </div>
+
+      <div className="theme-icon">
+        ☾
+      </div>
+    </nav>
+
       <h1>My Movie App 🎬</h1>
 
-      {/* Movie Search */}
       <input
         type="text"
         placeholder="Search movie..."
@@ -98,7 +112,7 @@ function App() {
   </p>
 )}
 
-      <h2>Movies 🎬</h2>
+      <h2 id="movies">Movies 🎬</h2>
 
       {movieLoading && <p>Loading Movies...</p>}
 
@@ -115,17 +129,21 @@ function App() {
         )
         .map((movie) => (
           <MovieCard
-            key={movie.id}
-            title={movie.title}
-            rating={movie.rating}
-            image={movie.image}
-            description={movie.description}
-            onWatch={() => handleWatch(movie.title)}
-            onFavorite={() => handleFavorite(movie)}
-            isFavorite={favorites.some(
-              (fav) => fav.id === movie.id
-            )}
-          />
+  key={movie.id}
+  title={movie.title}
+  rating={movie.rating}
+  image={movie.image}
+  description={movie.description}
+  onWatch={() => {
+    handleWatch(movie.title);
+    setWatchedMovie(movie.title);
+  }}
+  onFavorite={() => handleFavorite(movie)}
+  isFavorite={favorites.some(
+    (fav) => fav.id === movie.id
+  )}
+  isWatched={watchedMovie === movie.title}
+/>
         ))}
     </div>
   )}
@@ -149,8 +167,8 @@ function App() {
   </button>
 
 </div>
-      {/* Favorites */}
-      <h2>Favorites ❤️</h2>
+   
+      <h2 id="favorites">Favorites ❤️</h2>
 
       {favorites.length === 0 ? (
         <p>No favorite movies yet.</p>

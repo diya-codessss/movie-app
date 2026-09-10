@@ -6,9 +6,11 @@ function MovieCard({
   onWatch,
   onFavorite,
   isFavorite,
+  isWatched,
 }) {
   return (
     <div className="movie-card">
+
       <img
         src={image}
         alt={title}
@@ -21,10 +23,10 @@ function MovieCard({
       <p>{description}</p>
 
       <button
-        className="watch-btn"
+        className={`watch-btn ${isWatched ? "watched" : ""}`}
         onClick={onWatch}
       >
-        🎬 Watch Movie
+        {isWatched ? "✓ Watching" : "🎬 Watch Movie"}
       </button>
 
       <button
@@ -35,6 +37,7 @@ function MovieCard({
           ? "❤️ Favorited"
           : "🤍 Add to Favorites"}
       </button>
+
     </div>
   );
 }
