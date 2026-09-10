@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "./App.css";
 import MovieCard from "./components/MovieCard";
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
     })
     .then((data) => {
       setMovies(
-        data.slice(0, 10).map((item) => ({
+        data.slice(0, 15).map((item) => ({
           id: item.id,
           title: item.title,
           rating: item.rt_score,
@@ -129,23 +130,25 @@ function App() {
     </div>
   )}
 
-      {/* Watch Count */}
-      <p>Watch Count: {count}</p>
+     <div className="watch-section">
 
-      {currentMovie && (
-        <p>🎬 Currently watching: {currentMovie}</p>
-      )}
+  <p>Watch Count: {count}</p>
 
-      {count > 0 ? (
-        <p>Movie is being watched 🎬</p>
-      ) : (
-        <p>Click Watch to start watching.</p>
-      )}
+  {currentMovie && (
+    <p>🎬 Currently watching: {currentMovie}</p>
+  )}
 
-      <button onClick={() => setCount(0)}>
-        Reset
-      </button>
+  {count > 0 ? (
+    <p>Movie is being watched 🎬</p>
+  ) : (
+    <p>Click Watch to start watching.</p>
+  )}
 
+  <button onClick={() => setCount(0)}>
+    Reset
+  </button>
+
+</div>
       {/* Favorites */}
       <h2>Favorites ❤️</h2>
 
