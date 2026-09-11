@@ -32,7 +32,7 @@ function App() {
         data.slice(0, 15).map((item) => ({
           id: item.id,
           title: item.title,
-          rating: item.rt_score,
+          rating: (item.rt_score / 10).toFixed(1),
           image: item.image,
           description: item.description,
         }))
