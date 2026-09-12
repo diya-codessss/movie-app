@@ -106,9 +106,15 @@ function App() {
         onChange={(e) => setSearch(e.target.value)}
       />
 
-     {search && (
+        {search && (
   <p className="search-result">
-    Searching for: "{search}"
+    🔎 Searching for: "{search}" —{" "}
+    {
+      movies.filter((movie) =>
+        movie.title.toLowerCase().includes(search.toLowerCase())
+      ).length
+    }{" "}
+    movies found
   </p>
 )}
 
