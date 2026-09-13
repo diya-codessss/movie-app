@@ -126,6 +126,14 @@ function App() {
 
       {!movieLoading && 
   !movieError && (
+    {search &&
+  movies.filter((movie) =>
+    movie.title.toLowerCase().includes(search.toLowerCase())
+  ).length === 0 && (
+    <p className="search-result">
+      😕 No movies found for "{search}"
+    </p>
+)}
     <div className="movies">
       {movies
         .filter((movie) => 
