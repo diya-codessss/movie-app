@@ -105,6 +105,14 @@ function App() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
+      {search && (
+  <button
+    onClick={() => setSearch("")}
+    className="clear-search"
+  >
+    ✕ Clear Search
+  </button>
+)}
 
         {search && (
   <p className="search-result">
