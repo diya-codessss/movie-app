@@ -221,6 +221,9 @@ function App() {
           ))}
         </div>
       )}
+            <footer>
+        <p>© 2026 Movie App | Built with React ❤️</p>
+      </footer>
     </div>
   );
 }
