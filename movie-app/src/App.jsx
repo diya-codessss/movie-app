@@ -4,6 +4,7 @@ import MovieCard from "./components/MovieCard";
 
 function App() {
   const [count, setCount] = useState(0);
+  const [darkMode, setDarkMode] = useState(true);
   const [currentMovie, setCurrentMovie] = useState("");
   const [search, setSearch] = useState("");
   const [watchedMovies, setWatchedMovies] = useState([]);
@@ -91,10 +92,12 @@ function App() {
         <a href="#movies">⌂ Movies</a>
         <a href="#favorites">♡ Favorites</a>
       </div>
-
-      <div className="theme-icon">
-        ☾
-      </div>
+    <div
+  className="theme-icon"
+  onClick={() => setDarkMode(!darkMode)}
+>
+  {darkMode ? "☀️" : "🌙"}
+</div>
     </nav>
 
       <h1>My Movie App 🎬</h1>
