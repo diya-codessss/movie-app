@@ -9,6 +9,8 @@ function App() {
   const [search, setSearch] = useState("");
   const [watchedMovies, setWatchedMovies] = useState([]);
 
+  const [randomMovie, setRandomMovie] = useState(null);
+
   const [movies, setMovies] = useState([]);
   const [movieLoading, setMovieLoading] = useState(true);
   const [movieError, setMovieError] = useState("");
@@ -128,6 +130,25 @@ function App() {
     movies found
   </p>
 )}
+<button
+  className="random-btn"
+  onClick={() => {
+    const randomIndex = Math.floor(Math.random() * movies.length);
+    setRandomMovie(movies[randomIndex]);
+  }}
+>
+  🎲 Pick Random Movie
+</button>
+
+{randomMovie && (
+  <div className="random-movie">
+    <h3>🎬 Your Random Pick</h3>
+    <p>{randomMovie.title}</p>
+    <p>⭐ Rating: {randomMovie.rating}/10</p>
+  </div>
+)}
+
+<h2 id="movies">Movies 🎬</h2>
 
       <h2 id="movies">Movies 🎬</h2>
 

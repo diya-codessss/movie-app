@@ -446,3 +446,36 @@ footer p {
   color: #888;
   font-size: 14px;
 }
+.random-btn {
+  display: block;
+  margin: 25px auto;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(90deg, #6d28d9, #8b5cf6);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.random-btn:hover {
+  transform: scale(1.05);
+}
+
+.random-movie {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  text-align: center;
+  background: #111528;
+  border: 1px solid #8b5cf6;
+  border-radius: 16px;
+}
+
+.random-movie h3 {
+  color: #a78bfa;
+}
+
+.random-movie p {
+  color: #d1d5db;
+}
