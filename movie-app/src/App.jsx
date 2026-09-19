@@ -130,15 +130,23 @@ function App() {
     movies found
   </p>
 )}
-<button
-  className="random-btn"
-  onClick={() => {
-    const randomIndex = Math.floor(Math.random() * movies.length);
-    setRandomMovie(movies[randomIndex]);
-  }}
->
-  🎲 Pick Random Movie
-</button>
+{randomMovie && (
+  <div className="random-movie">
+    <h3>🎬 Your Random Pick</h3>
+    <p>{randomMovie.title}</p>
+    <p>⭐ Rating: {randomMovie.rating}/10</p>
+
+    <button
+      className="random-btn"
+      onClick={() => {
+        const randomIndex = Math.floor(Math.random() * movies.length);
+        setRandomMovie(movies[randomIndex]);
+      }}
+    >
+      🎲 Pick Again
+    </button>
+  </div>
+)}
 
 {randomMovie && (
   <div className="random-movie">
