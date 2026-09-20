@@ -229,6 +229,14 @@ function App() {
 </div>
    
       <h2 id="favorites">Favorites ❤️</h2>
+      {favorites.length > 0 && (
+  <button
+    className="clear-favorites"
+    onClick={() => setFavorites([])}
+  >
+    🗑️ Clear All Favorites
+  </button>
+)}
 
       {favorites.length === 0 ? (
         <p>No favorite movies yet.</p>
