@@ -228,7 +228,9 @@ function App() {
 
 </div>
    
-      <h2 id="favorites">Favorites ❤️</h2>
+  <h2 id="favorites">
+  Favorites ❤️ ({favorites.length})
+</h2>
       {favorites.length > 0 && (
   <button
     className="clear-favorites"
