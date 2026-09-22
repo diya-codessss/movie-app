@@ -17,10 +17,14 @@ function MovieCard({
       />
 
       <h2>{title}</h2>
+      <p className="movie-id">Movie ID: {title}</p>
 
       <p>⭐ Rating: {rating}/10</p>
-
-      <p>{description}</p>
+    <p>
+  {description.length > 120
+    ? description.slice(0, 120) + "..."
+    : description}
+</p>
       {isWatched && (
   <span className="watched-badge">
     ✓ Watched
