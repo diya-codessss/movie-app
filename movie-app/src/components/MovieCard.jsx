@@ -21,6 +21,11 @@ function MovieCard({
       <p>⭐ Rating: {rating}/10</p>
 
       <p>{description}</p>
+      {isWatched && (
+  <span className="watched-badge">
+    ✓ Watched
+  </span>
+)}
 
      <button
   className={isWatched ? "watch-btn watched" : "watch-btn"}

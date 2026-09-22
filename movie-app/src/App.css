@@ -494,3 +494,14 @@ footer p {
 .clear-favorites:hover {
   background: #dc2626;
 }
+.watched-badge {
+  display: inline-block;
+  margin: 8px 0;
+  padding: 5px 12px;
+  border-radius: 15px;
+  background: #191d31;
+  border: 1px solid #555;
+  color: #aaa;
+  font-size: 13px;
+  font-weight: bold;
+}
